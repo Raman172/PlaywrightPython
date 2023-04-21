@@ -1,0 +1,85 @@
+# Select tests based on matching their names with the given expression
+pytest -k "test_foo or test_bar"
+
+# Select tests based on their markers
+pytest -m "slow"
+
+# Increase verbosity of output
+pytest -v
+
+# Decrease verbosity of output
+pytest -q
+
+# Exit on first failure or error
+pytest -x
+
+# Exit after first num failures
+pytest --maxfail=2
+
+# Start the interactive Python debugger on errors or failures
+pytest --pdb
+
+# Measure code coverage during testing
+pytest --cov=my_module tests/
+
+# Generate an HTML report of test results
+pytest --html=report.html
+
+Run in parallel using xdist
+#--numprocesses=3
+
+# Run a single file:
+pytest path/to/test_file.py
+
+# Run only tests that failed in the last run:
+pytest --last-failed
+
+# Run only failed tests from previous test runs:
+pytest --failed-first
+
+# Rerun a test:
+pytest -k "test_name" --lf
+
+Find all the test files, test classes, test functions that will be executed.
+But don't run them...
+... but they are still loaded into memory so any code in the "body" of the files is executed.
+pytest --collect-only
+
+Pytest runs the test in the same order as they are found in the test module:
+examples/pytest/order/test_order.py
+pip install pytest-random-order
+And from now we can use the --random-order flag to run the tests in a random order.
+
+Test Coverage
+pip install pytest-cov
+pytest --cov=mymod --cov-report html --cov-branch
+Open htmlcov/index.html
+
+[pytest]
+addopts = -vs -rf --base-url https://www.saucedemo.com/  --device="iPhone 13" --browser=chromium --browser=firefox --browser=webkit --headed --slowmo=500 --html=report.html --html-report=./report --title='PYTEST REPORT'
+
+
+CodeGen : playwright codegen demo.playwright.dev/todomvc
+Pytest Debug : pytest --base-url=https://www.saucedemo.com  --browser=chromium -s
+TraceView :  playwright show-trace trace.zip   trace.playwright.dev
+
+
+Waits :
+default timeout is 30seconds and click(timeout=10000) , fill("this",timeout=10000)
+page.set_default_timeout(15000)
+page.pause()
+page.wait_for_timeout(5000) instead of time.sleep(5)
+page.wait_for_load_state("load")
+page.wait_for_load_state("networkidle")
+page.wait_for_selector(selector)
+page.wait_for_selector("[data-test=\"username\"]")
+
+
+page.locator("[data-test=\"username\"]").click(timeout=10000)
+Allure : allure serve ./AllureReports
+
+Python Coding Conventions
+module_name, package_name, ClassName,
+method_name, ExceptionName, function_name,
+GLOBAL_CONSTANT_NAME, global_var_name,
+instance_var_name, function_parameter_name, local_var_name
