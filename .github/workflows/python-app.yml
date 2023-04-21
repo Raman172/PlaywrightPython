@@ -31,6 +31,12 @@ jobs:
     - name: Ensure Playwright Browsers are installed
       run: |
         python -m playwright install
+        python -m pip install pytest-xdist
+    - name: Ensure Reporters are installed
+      run: |
+        python -m pip install allure-pytest
+        python -m pip install pytest-html
+        python -m pip install pytest-reporter-html1
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Lint with flake8
       run: |
