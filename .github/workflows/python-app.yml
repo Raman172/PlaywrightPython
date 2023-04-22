@@ -16,8 +16,16 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest]
     steps:
+      - name: Install dependencies
+        if: matrix.os == 'windows-latest'
+        run: |
+          choco sources add -name chocolatey -source https://chocolatey.org/api/v2/
+          choco sources add -name webkit -source https://www.myget.org/F/playwright/
+          choco install webkit
     - uses: actions/checkout@v3
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
@@ -28,11 +36,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8 pytest-playwright
         python -m pip install playwright
-    - name: Install WebKit using Chocolatey
-      run: |
-        choco sources add -name chocolatey -source https://chocolatey.org/api/v2/
-        choco sources add -name webkit -source https://www.myget.org/F/playwright/
-        choco install webkit
     - name: Ensure Playwright Browsers are installed
       run: |
         python -m playwright install
