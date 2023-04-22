@@ -52,3 +52,5 @@ jobs:
         name: test-reports
         path: |
           report.html
+          AllureReports/
+          HtmlReports/
