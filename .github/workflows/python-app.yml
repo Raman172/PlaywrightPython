@@ -30,7 +30,8 @@ jobs:
         python -m pip install playwright
     - name: Install WebKit using Chocolatey
       run: |
-        choco install webkit -s https://api.nuget.org/v3/index.json
+        choco sources add -name webkit -source https://www.nuget.org/api/v2/
+        choco install webkit --pre
     - name: Ensure Playwright Browsers are installed
       run: |
         python -m playwright install
